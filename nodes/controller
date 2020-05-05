@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+import numpy as np
+import rospy
+from hopf_oscillators import CoupledOscillatorController
+
+ix = np.zeros((2,20))
+si = np.zeros((2,20))
+si[0,:] += 0.1
+iw = 2
+ip = 1
+il = 1
+
+node = CoupledOscillatorController(ix=ix, iw=iw, ip=1, il=1, si=si,method='euler')
+hz = 100
+rate = rospy.Rate(hz)
+
+
+while not rospy.is_shutdown():
+    node.step()
+    rate.sleep()
