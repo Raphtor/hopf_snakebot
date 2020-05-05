@@ -9,8 +9,8 @@ si[0,:] += 0.1
 iw = 2
 ip = 1
 il = 1
-
-node = CoupledOscillatorController(ix=ix, iw=iw, ip=1, il=1, si=si,method='euler')
+topic = '/snakebot/joint_{}_position_controller/command'
+node = CoupledOscillatorController(publisher_fstring=topic, ix=ix, iw=iw, ip=1, il=1, si=si,method='euler')
 hz = 100
 rate = rospy.Rate(hz)
 

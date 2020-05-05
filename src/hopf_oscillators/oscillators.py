@@ -96,14 +96,14 @@ class CoupledOscillator(OscillatorNode):
 
 
 class CoupledOscillatorController(CoupledOscillator):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, publisher_fstring, *args, **kwargs):
         super(CoupledOscillatorController, self).__init__(*args, **kwargs)
         n = self.x.shape[1]
         rospy.init_node("CoupledOscillatorController")
         self.pubs = []
         for i in range(n):
             
-            pub = rospy.Publisher('/snakebot/joint_{}_position_controller/command'.format(i+1), Float64, queue_size=10)
+            pub = rospy.Publisher(publisher_fstring.format(i+1), Float64, queue_size=10)
             self.pubs.append(pub)
 
     def step(self, *args, **kwargs):
